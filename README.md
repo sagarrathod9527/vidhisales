@@ -1,63 +1,25 @@
-# VIDHI SALES — GitHub Ready Website
+# VIDHI SALES - website + Node.js backend + admin
 
-## Open in VS Code
-1. Extract this folder.
-2. Open the folder in VS Code.
-3. Open `index.html` or use Live Server.
+## Run it (Windows / XAMPP or any MySQL)
+1. Install Node.js 18+ (nodejs.org) and start MySQL (XAMPP > MySQL > Start).
+2. In this folder run: `npm install`
+3. Copy `.env.example` to `.env` and edit it (DB password, JWT_SECRET, ADMIN_USER / ADMIN_PASSWORD).
+4. Run: `npm start`
+5. Website: http://localhost:3000  |  Admin: http://localhost:3000/admin
 
-## Project structure
-```
-index.html            # page markup only
-css/style.css         # all styles
-js/config.js          # EmailJS keys + owner email
-js/main.js            # carousel, catalogue, search, forms
-js/firebase-config.js # optional Firebase config (not loaded by default)
-assets/               # images, logo, icons (keep your existing folder)
-firestore.rules
-.gitignore
-```
+The database and all tables are created automatically on first start.
+The first admin comes from ADMIN_USER / ADMIN_PASSWORD in `.env`.
+Extra admin or password reset: `npm run create-admin -- myname MyStrongPass123`
 
-## What is included
-- Professional responsive UI/UX
-- 6-image hero carousel with complete images using `object-fit: contain`
-- VIDHI SALES Ponda shop image and Google Maps button
-- Consultant section for Vinod Naik with photo
-- Product, machine, tool and service catalogue
-- Fuzzy/typo-tolerant product search
-- Request quotation and contact forms
-- EmailJS integration with mailto fallback
+## What it does
+- POST /api/quote    saves one quotation with many items (quotation_requests + quotation_items)
+- POST /api/contact  saves contact messages
+- /admin             login, stats, search/filter, status updates, delete, CSV export, change password
+- The server re-checks name, phone, email (real domain endings), items, duplicates and quantities
+  with the same validators as the website (js/validate.js, js/data.js).
 
-## Owner email
-`vidhisalesproducts@gmail.com`
-
-## Automatic email setup
-The site is prepared for EmailJS. In `js/config.js`, replace:
-- `YOUR_EMAILJS_PUBLIC_KEY`
-- `YOUR_EMAILJS_SERVICE_ID`
-- `YOUR_EMAILJS_QUOTE_TEMPLATE_ID`
-- `YOUR_EMAILJS_CONTACT_TEMPLATE_ID`
-
-Set the EmailJS templates to send to `vidhisalesproducts@gmail.com`. The website will then send quotation/contact requests directly through EmailJS. Until configured, it opens the visitor's email app with the message pre-filled.
-
-## GitHub
-Create a repository, then from this folder run:
-```bash
-git init
-git add .
-git commit -m "VIDHI SALES professional website"
-git branch -M main
-git remote add origin YOUR_GITHUB_REPOSITORY_URL
-git push -u origin main
-```
-
-## Important
-Do not put Firebase Admin SDK credentials or private service-account keys in this frontend project.
-
-# Final VS Code / GitHub Ready
-
-## Latest visual update
-- Added the official VIDHI SALES logo as `assets/vidhi-sales-logo.png`.
-- Replaced repeated product images with individual product-reference crops from the supplied catalogue pages.
-- Added the real Ponda shop-front image to the About section as `assets/shop-ponda.jpg`.
-- Removed the duplicate shop image from the Shop section so the same shop photo is not repeated.
-- Updated hero and service images to use separate references rather than repeating the same image.
+## Deploy
+Needs a host that runs Node + MySQL (Render, Railway, a VPS, cPanel Node app). Set the variables from
+`.env.example` as environment variables, set BEHIND_PROXY=true behind HTTPS, run `npm start`.
+Vercel static hosting cannot run this backend: if the site stays there, host this server elsewhere and set
+API_BASE in js/config.js to its full URL (for example https://api.yourdomain.com/api/).

@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Dashboard | VIDHI SALES Admin</title><link rel="stylesheet" href="/admin/admin.css"></head>
+<body><div class="top"><b>VIDHI SALES · ADMIN</b><div class="r"><span id="who"></span><a class="btn" href="/" target="_blank" rel="noopener">View site</a><button class="btn" id="pw">Change password</button><button class="btn" id="out">Sign out</button></div></div>
+<main><div class="stats" id="stats"></div>
+<div class="tabs"><button class="tab on" data-k="quotes">Quotations</button><button class="tab" data-k="messages">Messages</button></div>
+<div class="bar"><input class="grow" id="q" type="search" placeholder="Search name, phone, email, item…"><select id="st"></select><input id="from" type="date" title="From"><input id="to" type="date" title="To"><a class="btn" id="csv" href="#">Export CSV</a></div>
+<div class="wrap"><table><thead id="th"></thead><tbody id="tb"></tbody></table></div>
+<div class="pager"><span id="info"></span><div><button class="btn" id="prev">Previous</button><button class="btn" id="next">Next</button></div></div></main>
+<dialog id="dlg"><form method="dialog" id="pf"><h2 style="margin:0">Change password</h2><label for="cur">Current password</label><input id="cur" type="password" autocomplete="current-password" required><label for="nw">New password (min 8 characters)</label><input id="nw" type="password" autocomplete="new-password" minlength="8" required><div style="display:flex;gap:10px;margin-top:18px"><button class="btn pri" type="submit">Save</button><button class="btn" type="button" id="cl">Cancel</button></div><div class="err" id="pe" style="color:#d6334a;margin-top:10px"></div></form></dialog>
+<script src="/admin/admin.js"></script></body></html>

@@ -1,6 +1,9 @@
 // EmailJS configuration — edit these values to change where forms are sent.
 const OWNER_EMAIL = 'vidhisalesproducts@gmail.com';
 
+// API folder of the Node backend. Relative to the page.
+const API_BASE = 'api/'; // Node backend (server/). Use a full URL if the API lives on another domain.
+
 /*
 const EMAILJS_PUBLIC_KEY='YOUR_EMAILJS_PUBLIC_KEY';
 const EMAILJS_SERVICE_ID='YOUR_EMAILJS_SERVICE_ID';

@@ -1,146 +1,359 @@
-if (window.emailjs && EMAILJS_PUBLIC_KEY.startsWith('YOUR_') === false) emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-const slides = [
-    ['assets/hero-reference/hero-1.jpg', 'Professional cleaning in action'],
-    ['assets/hero-reference/hero-2.jpg', 'Professional floor care'],
-    ['assets/hero-reference/hero-3.jpg', 'Scrubber-dryer equipment'],
-    ['assets/hero-reference/hero-4.jpg', 'Carpet deep cleaning'],
-    ['assets/hero-reference/hero-5.jpg', 'Professional scrubbing machine'],
-    ['assets/hero-reference/hero-6.jpg', 'Cleaning equipment & solutions']
-];
-let currentSlide = 0;
-function renderSlides() { slidesEl.innerHTML = slides.map((s, i) => `<div class="slide ${i === 0 ? 'active' : ''}"><img src="${s[0]}" alt="${s[1]}"><span class="slide-label">${s[1]}</span></div>`).join(''); dots.innerHTML = slides.map((_, i) => `<button class="dot ${i === 0 ? 'active' : ''}" onclick="goSlide(${i})"></button>`).join('') }
-function goSlide(i) { currentSlide = (i + slides.length) % slides.length; document.querySelectorAll('.slide').forEach((e, n) => e.classList.toggle('active', n === currentSlide)); document.querySelectorAll('.dot').forEach((e, n) => e.classList.toggle('active', n === currentSlide)) }
-function moveSlide(n) { goSlide(currentSlide + n) }
-setInterval(() => moveSlide(1), 5000);
-const services = [
-    ['Housekeeping Consultancy', 'Operational guidance for standards, workflows, manpower and cleaning systems.'],
-    ['Professional Cleaning Solutions', 'Cleaning methods matched to surfaces, environments and site requirements.'],
-    ['Mechanised Deep Cleaning', 'Deep cleaning for carpets, floors, upholstery and difficult areas.'],
-    ['Product & Equipment Supply', 'Professional chemicals, machines, tools, accessories and hygiene products.'],
-    ['Housekeeping Staff Training', 'Practical training in cleaning methods, equipment, chemicals and safe work.'],
-    ['Equipment Training', 'Hands-on guidance for professional cleaning machines and equipment.'],
-    ['Chemical Training', 'Correct product selection, dilution, application and safe handling.'],
-    ['SOP Development', 'Standard Operating Procedures for consistent housekeeping operations.'],
-    ['Quality Control & Inspection', 'Inspection systems and quality checks to maintain cleaning standards.'],
-    ['Hygiene Improvement', 'Programs for hygiene, sanitation and maintenance improvement.'],
-    ['Manpower & Work Planning', 'Task allocation, scheduling and operational planning support.'],
-    ['After-Sales & Practical Guidance', 'Product-use guidance and practical support around cleaning operations.']
-];
-const products = [
-    ['S2 All Klean Floor Cleaner', 'chemical', 'Professional floor cleaning solution.', ['floor', 'flore', 'chemicle', 'chemical', 'cleaner', 'all klean'], 'assets/products/photos/s2-all-klean-floor-cleaner.jpg'],
-    ['S3 Window Shine Glass Cleaner', 'chemical', 'Glass and window cleaning solution.', ['glass', 'window', 'shine'], 'assets/products/photos/s3-window-shine-glass-cleaner.jpg'],
-    ['S1 Germ Free Bathroom Cleaner', 'chemical', 'Bathroom cleaning solution.', ['bathroom', 'toilet', 'germ'], 'assets/catalogue-products/cat1-chem-1-3.jpg'],
-    ['K6 Natural Steel Polish', 'chemical', 'Steel and stainless-steel care.', ['steel', 'polish', 'metal'], 'assets/products/photos/k6-natural-steel-polish.jpg'],
-    ['S6 Super Lime Away', 'chemical', 'Lime and scale cleaning solution.', ['lime', 'scale', 'descaler'], 'assets/products/photos/s6-super-lime-away.jpg'],
-    ['S12 Hand Wash', 'chemical', 'Hand hygiene product.', ['hand', 'wash', 'hygiene'], 'assets/products/photos/s12-hand-wash.jpg'],
-    ['K1 Sparklean Dish Wash', 'chemical', 'Dish and kitchen cleaning.', ['dish', 'kitchen', 'wash'], 'assets/products/photos/k1-sparklean-dish-wash.jpg'],
-    ['K2 Kofvan Kitchen Floor', 'chemical', 'Kitchen floor cleaning.', ['kitchen', 'floor', 'kofvan'], 'assets/products/photos/k2-kofvan-kitchen-floor.jpg'],
-    ['S11 Labello Hand Wash', 'chemical', 'Hand wash solution.', ['hand', 'wash', 'labello'], 'assets/products/photos/s11-labello-hand-wash.jpg'],
-    ['S17 Carpet Brite', 'chemical', 'Carpet cleaning solution.', ['carpet', 'brite', 'shampoo'], 'assets/products/photos/s17-carpet-brite.jpg'],
-    ['S14 Floor Stripper Heavy Duty', 'chemical', 'Heavy-duty floor stripping.', ['floor', 'stripper', 'heavy', 'duty'], 'assets/products/photos/s14-floor-stripper-heavy-duty.jpg'],
-    ['S4 Sun Glow Furniture Polish', 'chemical', 'Furniture care and polishing.', ['furniture', 'polish', 'wood'], 'assets/products/photos/s4-sun-glow-furniture-polish.jpg'],
-    ['S20 Wash Auto Car Shampoo', 'chemical', 'Vehicle cleaning shampoo.', ['car', 'auto', 'shampoo'], 'assets/products/photos/s20-wash-auto-car-shampoo.jpg'],
-    ['K16 Citrus Scrub', 'chemical', 'Cleaning and scrubbing solution.', ['citrus', 'scrub'], 'assets/products/photos/k16-citrus-scrub.jpg'],
-    ['HDC Heavy Duty Cleaner', 'chemical', 'Heavy-duty cleaning.', ['heavy', 'duty', 'cleaner', 'hdc'], 'assets/products/photos/hdc-heavy-duty-cleaner.jpg'],
-    ['D-Scale Floor Clean', 'chemical', 'Scale and floor cleaning.', ['scale', 'floor', 'd scale'], 'assets/products/photos/d-scale-floor-clean.jpg'],
-    ['Bowl Clean Toilet Cleaner', 'chemical', 'Toilet and bowl cleaning.', ['toilet', 'bowl', 'bathroom'], 'assets/products/photos/bowl-clean-toilet-cleaner.jpg'],
-    ['Fresh-Air Air Freshener', 'chemical', 'Air freshening solution.', ['air', 'freshener', 'fragrance'], 'assets/products/photos/fresh-air-air-freshener.jpg'],
-    ['Carpet Cleaner', 'chemical', 'Professional carpet cleaning.', ['carpet', 'cleaner'], 'assets/catalogue-products/cat1-chem-2-4.jpg'],
-    ['Microfiber Floor Mop', 'tool', 'Professional microfiber floor mop.', ['mop', 'floor', 'microfiber'], 'assets/products/photos/microfiber-floor-mop.jpg'],
-    ['Dry Vacuum Cleaner', 'machine', 'Professional dry vacuum equipment.', ['dry', 'vacuum'], 'assets/products/photos/dry-vacuum-cleaner.jpg'],
-    ['VAC 301 Wet & Dry Vacuum Cleaner', 'machine', 'Wet and dry professional vacuum cleaner.', ['wet', 'dry', 'vacuum', 'vac 301'], 'assets/catalogue-products/cat2-machine-2-1.jpg'],
-    ['Single Disc Machine', 'machine', 'Floor scrubbing and polishing machine.', ['single', 'disc', 'scrubber', 'polisher'], 'assets/products/photos/single-disc-machine.jpg'],
-    ['SUPER-4 Multi Speed Scrubber', 'machine', 'Multi-speed professional floor scrubber.', ['super 4', 'scrubber', 'multi speed'], 'assets/products/super4-scrubber.jpg'],
-    ['High Pressure Machine', 'machine', 'High-pressure cleaning equipment.', ['high', 'pressure', 'machine', 'jet'], 'assets/products/photos/high-pressure-machine.jpg'],
-    ['20 LTR Vacuum Cleaner', 'machine', 'Professional vacuum equipment.', ['20 ltr', '20l', 'vacuum'], 'assets/products/photos/20-ltr-vacuum-cleaner.jpg'],
-    ['Polishing Machine', 'machine', 'Professional floor polishing.', ['polishing', 'machine'], 'assets/products/photos/polishing-machine.jpg'],
-    ['50 LTR Vacuum Cleaner', 'machine', 'Large-capacity vacuum.', ['50 ltr', '50l', 'vacuum'], 'assets/catalogue-products/cat2-machine-2-3.jpg'],
-    ['Carpet Extractor', 'machine', 'Professional carpet extraction machine.', ['carpet', 'extractor'], 'assets/products/photos/carpet-extractor.jpg'],
-    ['Auto Klean With Refill', 'machine', 'Cleaning equipment with refill system.', ['auto klean', 'refill'], 'assets/products/photos/auto-klean-with-refill.jpg'],
-    ['Air Pressure With Refill', 'machine', 'Professional air-pressure equipment.', ['air pressure', 'refill'], 'assets/products/photos/air-pressure-with-refill.jpg'],
-];
-const industries = ['Pharmaceutical Industries', 'Hotels & Hospitality', 'Food Industries', 'Temples & Religious Institutions', 'Spas & Wellness Centres', 'Commercial Establishments', 'Corporate Facilities', 'Other Institutional Facilities'];
-const norm = s => s.toLowerCase().replace(/[^a-z0-9]+/g, ' '); const lev = (a, b) => { a = norm(a); b = norm(b); const d = Array.from({ length: b.length + 1 }, (_, i) => [i]); for (let i = 0; i <= a.length; i++)d[i] = [i, ...Array(b.length).fill(0)]; for (let i = 1; i <= a.length; i++)for (let j = 1; j <= b.length; j++)d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[a.length][b.length] };
-function matches(p, q) { if (!q) return true; const text = norm([p[0], p[1], p[2], ...(p[3] || [])].join(' ')); const nq = norm(q); if (text.includes(nq)) return true; return nq.split(' ').some(token => token.length >= 3 && text.split(' ').some(w => w.startsWith(token) || lev(w, token) <= 1)) }
-function renderServices() { serviceGrid.innerHTML = services.map(s => `<article class="service"><div class="service-body"><span class="service-kicker">VIDHI SALES SERVICE</span><h3>${s[0]}</h3><p>${s[1]}</p></div></article>`).join('') }
-function renderProducts() { const q = document.getElementById('search').value, c = document.getElementById('category').value; const a = products.filter(p => (!c || p[1] === c) && matches(p, q)); productGrid.innerHTML = a.length ? a.map(p => `<article class="product"><div class="product-media"><img src="${p[4]}" alt="${p[0]}" loading="lazy"></div><div class="product-body"><span class="tag">${p[1]}</span><h3>${p[0]}</h3><p>${p[2]}</p><button type="button" class="btn btn-blue buy-now" data-item="${esc(p[0])}">Buy Now →</button></div></article>`).join('') : `<div class="empty">No exact result. Try <b>floor</b>, <b>chemical</b>, <b>cleaner</b>, <b>vacuum</b> or <b>machine</b>.</div>` }
-function fillQuote() { quoteItem.innerHTML = '<option value="">Select product or service</option><optgroup label="Products">' + products.map(p => `<option>${p[0]}</option>`).join('') + '</optgroup><optgroup label="Services">' + services.map(s => `<option>${s[0]}</option>`).join('') + '</optgroup>' }
-function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;') }
-function selectQuote(v) { quoteItem.value = v; document.getElementById('quote').scrollIntoView({ behavior: 'smooth' }); setTimeout(() => document.querySelector('[name="message"]').focus(), 500) }
-function renderIndustries() { industryGrid.innerHTML = industries.map(x => `<div class="industry">${x}</div>`).join('') }
-function toggleMenu() { document.getElementById('navlinks').classList.toggle('open') }
-function fallbackMail(form, subject) { const fd = new FormData(form); const lines = []; fd.forEach((v, k) => lines.push(`${k}: ${v}`)); location.href = `mailto:${OWNER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}` }
-async function sendEmail(templateId, params, form, status) { if (window.emailjs && !EMAILJS_PUBLIC_KEY.startsWith('YOUR_')) { await emailjs.send(EMAILJS_SERVICE_ID, templateId, params); status.className = 'status success'; status.textContent = 'Sent successfully. VIDHI SALES will receive your email enquiry.'; form.reset(); return true } fallbackMail(form, params.subject || 'VIDHI SALES Enquiry'); status.className = 'status success'; status.textContent = 'Your email app has been opened with the enquiry ready to send.'; return true }
-document.getElementById('quoteForm').addEventListener('submit', async e => { e.preventDefault(); const f = e.target, s = document.getElementById('quoteStatus'), fd = new FormData(f); s.textContent = 'Sending...'; try { await sendEmail(EMAILJS_QUOTE_TEMPLATE_ID, { subject: 'VIDHI SALES Quotation Request', to_email: OWNER_EMAIL, customer_name: fd.get('customer_name'), customer_phone: fd.get('customer_phone'), customer_email: fd.get('customer_email'), company: fd.get('company'), item: fd.get('item'), quantity: fd.get('quantity'), message: fd.get('message') }, f, s) } catch (err) { s.className = 'status error'; s.textContent = 'Email service is not configured yet. Please use the email button or contact VIDHI SALES directly.' } });
-document.getElementById('contactForm').addEventListener('submit', async e => { e.preventDefault(); const f = e.target, s = document.getElementById('contactStatus'), fd = new FormData(f); s.textContent = 'Sending...'; try { await sendEmail(EMAILJS_CONTACT_TEMPLATE_ID, { subject: 'VIDHI SALES Website Contact', to_email: OWNER_EMAIL, name: fd.get('name'), email: fd.get('email'), message: fd.get('message') }, f, s) } catch (err) { s.className = 'status error'; s.textContent = 'Email service is not configured yet.' } });
+/* VIDHI SALES — shared UI: quotation basket, toasts, card renderers, motion + effects.
+   Loaded on every page (after data.js). */
+(function () {
+    'use strict';
+    var VS = window.VS = window.VS || {};
+    var D = VS.data;
+    var $ = function (s, r) { return (r || document).querySelector(s); };
+    var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+    var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var PAGE = document.body.getAttribute('data-page') || '';
+    VS.util = { $: $, $$: $$, esc: esc, reduceMotion: reduceMotion };
 
-/* ===== Premium scroll + interaction effects ===== */
-const motionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            motionObserver.unobserve(entry.target);
+    var ICON = {
+        plus: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+        check: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+        x: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+        list: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg>'
+    };
+    VS.icons = ICON;
+
+    /* ======================= Quotation basket =======================
+       One entry per product/service (key = "type:id"). Duplicates are refused.
+       Saved in localStorage so the list follows the visitor from page to page. */
+    var STORE_KEY = 'vidhisales.quote.v1';
+    var MAX_ITEMS = VS.MAX_ITEMS = 50;
+    var memory = null; // fallback when storage is blocked
+
+    function readStore() {
+        var raw = null;
+        try { raw = window.localStorage.getItem(STORE_KEY); } catch (e) { return memory || []; }
+        if (!raw) return [];
+        try { var arr = JSON.parse(raw); return Array.isArray(arr) ? arr : []; } catch (e) { return []; }
+    }
+    function writeStore(list) {
+        memory = list;
+        try { window.localStorage.setItem(STORE_KEY, JSON.stringify(list)); } catch (e) { /* private mode */ }
+    }
+    function hydrate(list) {
+        var seen = {}, out = [];
+        list.forEach(function (r) {
+            if (!r || (r.type !== 'product' && r.type !== 'service')) return;
+            var item = D.find(r.type, r.id);
+            var key = r.type + ':' + r.id;
+            if (!item || seen[key]) return;
+            seen[key] = 1;
+            var q = parseInt(r.qty, 10);
+            out.push({ key: key, type: r.type, id: r.id, name: item.name, img: item.img, qty: r.type === 'service' ? 1 : (q >= 1 && q <= 100000 ? q : 1) });
+        });
+        return out.slice(0, MAX_ITEMS);
+    }
+    var items = hydrate(readStore());
+
+    function persist() {
+        writeStore(items.map(function (i) { return { type: i.type, id: i.id, qty: i.qty }; }));
+        document.dispatchEvent(new CustomEvent('basket:change'));
+    }
+    var basket = VS.basket = {
+        list: function () { return items.slice(); },
+        count: function () { return items.length; },
+        has: function (key) { return items.some(function (i) { return i.key === key; }); },
+        get: function (key) { for (var i = 0; i < items.length; i++) { if (items[i].key === key) return items[i]; } return null; },
+        /* returns { ok:true } or { ok:false, reason:'duplicate'|'full'|'unknown' } */
+        add: function (type, id, qty) {
+            var item = D.find(type, id);
+            if (!item) return { ok: false, reason: 'unknown' };
+            var key = type + ':' + id;
+            if (basket.has(key)) return { ok: false, reason: 'duplicate', name: item.name };
+            if (items.length >= MAX_ITEMS) return { ok: false, reason: 'full' };
+            var n = type === 'service' ? 1 : (parseInt(qty, 10) || 1);
+            items.push({ key: key, type: type, id: id, name: item.name, img: item.img, qty: n });
+            persist();
+            return { ok: true, name: item.name };
+        },
+        remove: function (key) {
+            var before = items.length;
+            items = items.filter(function (i) { return i.key !== key; });
+            if (items.length !== before) persist();
+        },
+        setQty: function (key, qty) {
+            var it = basket.get(key);
+            if (!it || it.type === 'service') return;
+            it.qty = qty;
+            writeStore(items.map(function (i) { return { type: i.type, id: i.id, qty: i.qty }; })); // no re-render while typing
+        },
+        clear: function () { items = []; persist(); }
+    };
+    window.addEventListener('storage', function (e) { // keep other open tabs in sync
+        if (e.key === STORE_KEY) { items = hydrate(readStore()); document.dispatchEvent(new CustomEvent('basket:change')); }
+    });
+
+    /* ======================= Toasts ======================= */
+    var toastWrap = document.createElement('div');
+    toastWrap.className = 'toasts';
+    toastWrap.setAttribute('role', 'status');
+    toastWrap.setAttribute('aria-live', 'polite');
+    document.body.appendChild(toastWrap);
+    VS.toast = function (msg, kind) {
+        var t = document.createElement('div');
+        t.className = 'toast ' + (kind || '');
+        t.innerHTML = '<span class="toast-ic">' + (kind === 'warn' ? '!' : ICON.check) + '</span><span>' + esc(msg) + '</span>';
+        toastWrap.appendChild(t);
+        while (toastWrap.children.length > 3) toastWrap.removeChild(toastWrap.firstChild);
+        requestAnimationFrame(function () { t.classList.add('show'); });
+        setTimeout(function () { t.classList.remove('show'); setTimeout(function () { t.remove(); }, 400); }, 2800);
+    };
+
+    /* ======================= Card renderers ======================= */
+    function addControls(type, id) {
+        var key = type + ':' + id;
+        return '<div class="add-wrap" data-key="' + key + '">' +
+            '<button type="button" class="btn btn-add" data-add="' + key + '"><span class="ic-plus">' + ICON.plus + '</span><span class="ic-check">' + ICON.check + '</span><span class="add-label">Add to quote</span></button>' +
+            '<button type="button" class="icon-btn remove-mini" data-remove="' + key + '" aria-label="Remove from quotation list" title="Remove from quotation list">' + ICON.x + '</button></div>';
+    }
+    VS.ui = {
+        productCard: function (p) {
+            return '<article class="card product-card spot tilt" data-reveal>' +
+                '<div class="p-stage"><img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async"><span class="chip chip-' + p.cat + '">' + esc(p.catLabel) + '</span></div>' +
+                '<div class="p-body"><h3>' + esc(p.name) + '</h3><p>' + esc(p.desc) + '</p>' + addControls('product', p.id) + '</div></article>';
+        },
+        serviceCard: function (s, extra) {
+            return '<article class="card service-card spot ' + (extra || '') + '" data-reveal>' +
+                '<div class="s-icon"><img src="' + esc(s.img) + '" alt="" width="56" height="56" loading="lazy"></div>' +
+                '<h3>' + esc(s.name) + '</h3><p>' + esc(s.desc) + '</p>' + addControls('service', s.id) + '</article>';
+        },
+        observe: function (root) { observeReveals(root || document); syncButtons(); }
+    };
+
+    function syncButtons() {
+        $$('.add-wrap').forEach(function (w) {
+            var added = basket.has(w.getAttribute('data-key'));
+            w.classList.toggle('is-added', added);
+            var b = $('.btn-add', w);
+            b.setAttribute('aria-disabled', added ? 'true' : 'false');
+            b.querySelector('.add-label').textContent = added ? 'Added to quote' : 'Add to quote';
+            b.tabIndex = added ? -1 : 0;
+        });
+    }
+
+    document.addEventListener('click', function (e) {
+        var add = e.target.closest && e.target.closest('[data-add]');
+        if (add) {
+            var parts = add.getAttribute('data-add').split(':');
+            var res = basket.add(parts[0], parts.slice(1).join(':'), 1);
+            if (res.ok) { VS.toast(res.name + ' added to your quotation list.'); pulseFab(); }
+            else if (res.reason === 'duplicate') VS.toast(res.name + ' is already in your quotation list.', 'warn');
+            else if (res.reason === 'full') VS.toast('Your list is full (' + MAX_ITEMS + ' items). Send this quotation first.', 'warn');
+            return;
         }
-    });
-}, { threshold: .12, rootMargin: '0px 0px -45px 0px' });
-
-function prepareMotion() {
-    document.querySelectorAll('section .section-head, .about-copy, .about-photo, .consultant, .shop, .contact-card, .contact .form, .form').forEach((el, i) => {
-        if (!el.classList.contains('reveal')) el.classList.add('reveal');
-        motionObserver.observe(el);
+        var rm = e.target.closest && e.target.closest('[data-remove]');
+        if (rm) { basket.remove(rm.getAttribute('data-remove')); VS.toast('Removed from your quotation list.'); }
     });
 
-    document.querySelectorAll('.service, .product, .industry, .review, .trust div').forEach((el, i) => {
-        if (!el.classList.contains('stagger-item')) el.classList.add('stagger-item');
-        el.style.transitionDelay = `${Math.min((i % 6) * 70, 350)}ms`;
-        motionObserver.observe(el);
+    /* ======================= Basket FAB + drawer + header badge ======================= */
+    var fab, drawer, scrim;
+    function buildBasketUI() {
+        if (PAGE === 'quote') return;
+        fab = document.createElement('button');
+        fab.type = 'button';
+        fab.className = 'fab';
+        fab.id = 'basketFab';
+        fab.setAttribute('aria-haspopup', 'dialog');
+        fab.innerHTML = '<span class="fab-ic">' + ICON.list + '</span><span class="fab-text">Request quote</span><span class="fab-count" data-basket-count>0</span>';
+        document.body.appendChild(fab);
+
+        scrim = document.createElement('div');
+        scrim.className = 'scrim';
+        document.body.appendChild(scrim);
+
+        drawer = document.createElement('aside');
+        drawer.className = 'drawer';
+        drawer.setAttribute('role', 'dialog');
+        drawer.setAttribute('aria-modal', 'true');
+        drawer.setAttribute('aria-label', 'Your quotation list');
+        drawer.innerHTML = '<div class="drawer-head"><h2>Your quotation list</h2><button type="button" class="icon-btn" data-close aria-label="Close">' + ICON.x + '</button></div>' +
+            '<div class="drawer-body" id="drawerBody"></div>' +
+            '<div class="drawer-foot"><a class="btn btn-primary" href="quote.html">Review &amp; send quotation</a><button type="button" class="link-btn" data-clear>Clear list</button></div>';
+        document.body.appendChild(drawer);
+
+        fab.addEventListener('click', function () {
+            if (basket.count() === 0) { window.location.href = 'quote.html'; return; }
+            openDrawer();
+        });
+        scrim.addEventListener('click', closeDrawer);
+        drawer.addEventListener('click', function (e) {
+            if (e.target.closest('[data-close]')) closeDrawer();
+            if (e.target.closest('[data-clear]')) { basket.clear(); }
+            var r = e.target.closest('[data-drawer-remove]');
+            if (r) basket.remove(r.getAttribute('data-drawer-remove'));
+        });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
+    }
+    function openDrawer() { renderDrawer(); drawer.classList.add('open'); scrim.classList.add('open'); fab.setAttribute('aria-expanded', 'true'); var c = $('[data-close]', drawer); if (c) c.focus(); }
+    function closeDrawer() { drawer.classList.remove('open'); scrim.classList.remove('open'); fab.setAttribute('aria-expanded', 'false'); fab.focus(); }
+    function renderDrawer() {
+        var body = $('#drawerBody');
+        if (!body) return;
+        var list = basket.list();
+        if (!list.length) { body.innerHTML = '<p class="muted pad">Nothing added yet. Use “Add to quote” on any product or service.</p>'; return; }
+        body.innerHTML = '<ul class="mini-list">' + list.map(function (i) {
+            return '<li><span class="mini-img"><img src="' + esc(i.img) + '" alt=""></span><span class="mini-txt"><b>' + esc(i.name) + '</b><small>' + (i.type === 'service' ? 'Service' : 'Product, qty ' + i.qty) + '</small></span>' +
+                '<button type="button" class="icon-btn" data-drawer-remove="' + i.key + '" aria-label="Remove ' + esc(i.name) + '">' + ICON.x + '</button></li>';
+        }).join('') + '</ul>';
+    }
+    function pulseFab() { if (!fab) return; fab.classList.remove('bump'); void fab.offsetWidth; fab.classList.add('bump'); }
+    function syncCounts() {
+        var n = basket.count();
+        $$('[data-basket-count]').forEach(function (el) { el.textContent = n; el.classList.toggle('has', n > 0); });
+        if (fab) {
+            fab.classList.toggle('filled', n > 0);
+            var t = $('.fab-text', fab); if (t) t.textContent = n > 0 ? 'Quote list' : 'Request quote';
+        }
+        if (drawer && drawer.classList.contains('open')) { if (n === 0) closeDrawer(); else renderDrawer(); }
+        syncButtons();
+    }
+    document.addEventListener('basket:change', syncCounts);
+
+    /* ======================= Header / menu ======================= */
+    var header = $('.site-header');
+    var progress = $('.progress');
+    function onScroll() {
+        var y = window.scrollY || 0;
+        if (header) header.classList.toggle('scrolled', y > 16);
+        if (progress) {
+            var h = document.documentElement.scrollHeight - window.innerHeight;
+            progress.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, y / h) : 0) + ')';
+        }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    var menuBtn = $('.menu-btn'), nav = $('#primaryNav');
+    function closeMenu() { if (!nav) return; nav.classList.remove('open'); menuBtn.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+    if (menuBtn && nav) {
+        menuBtn.addEventListener('click', function () {
+            var open = nav.classList.toggle('open');
+            menuBtn.classList.toggle('open', open);
+            menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        nav.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+    }
+
+    /* ======================= Scroll reveal + counters ======================= */
+    var revealIO = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            en.target.classList.add('in');
+            revealIO.unobserve(en.target);
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }) : null;
+
+    function observeReveals(root) {
+        $$('[data-reveal]', root).forEach(function (el) {
+            if (el.__obs) return;
+            el.__obs = true;
+            el.classList.add('reveal');
+            var idx = 0, s = el;
+            while ((s = s.previousElementSibling)) { if (s.hasAttribute('data-reveal')) idx++; }
+            el.style.setProperty('--d', Math.min(idx, 8) * 60 + 'ms');
+            if (revealIO) revealIO.observe(el); else el.classList.add('in');
+        });
+    }
+    var countIO = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            countIO.unobserve(en.target);
+            runCounter(en.target);
+        });
+    }, { threshold: 0.6 }) : null;
+    function runCounter(el) {
+        var target = parseInt(el.getAttribute('data-count'), 10), suffix = el.getAttribute('data-suffix') || '';
+        if (reduceMotion || !target) { el.textContent = target + suffix; return; }
+        var start = null, dur = 1400;
+        function step(ts) {
+            if (start === null) start = ts;
+            var p = Math.min(1, (ts - start) / dur), e = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * e) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+    $$('[data-count]').forEach(function (el) { if (countIO) countIO.observe(el); else runCounter(el); });
+
+    /* ======================= Pointer effects (spotlight, tilt, magnetic, glow) ======================= */
+    document.addEventListener('pointermove', function (e) {
+        if (e.pointerType === 'touch') return;
+        var spot = e.target.closest && e.target.closest('.spot');
+        if (spot) {
+            var r = spot.getBoundingClientRect();
+            spot.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+            spot.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        }
+    }, { passive: true });
+
+    if (finePointer && !reduceMotion) {
+        var tilted = null;
+        document.addEventListener('pointermove', function (e) {
+            var el = e.target.closest && e.target.closest('.tilt');
+            if (tilted && tilted !== el) { tilted.style.transform = ''; tilted = null; }
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+            el.style.transform = 'perspective(900px) rotateX(' + ((0.5 - py) * 6).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 8).toFixed(2) + 'deg) translateY(-4px)';
+            tilted = el;
+        }, { passive: true });
+        document.addEventListener('mouseleave', function () { if (tilted) { tilted.style.transform = ''; tilted = null; } });
+
+        var mag = null;
+        document.addEventListener('pointermove', function (e) {
+            var el = e.target.closest && e.target.closest('.magnetic');
+            if (mag && mag !== el) { mag.style.translate = ''; mag = null; }
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            el.style.translate = ((e.clientX - (r.left + r.width / 2)) * 0.16).toFixed(1) + 'px ' + ((e.clientY - (r.top + r.height / 2)) * 0.26).toFixed(1) + 'px';
+            mag = el;
+        }, { passive: true });
+
+        var glow = document.createElement('div');
+        glow.className = 'cursor-glow';
+        document.body.appendChild(glow);
+        var gx = -400, gy = -400, tx = -400, ty = -400, running = false;
+        var loop = function () {
+            gx += (tx - gx) * 0.14; gy += (ty - gy) * 0.14;
+            glow.style.transform = 'translate3d(' + (gx - 240) + 'px,' + (gy - 240) + 'px,0)';
+            if (Math.abs(tx - gx) > 0.5 || Math.abs(ty - gy) > 0.5) requestAnimationFrame(loop); else running = false;
+        };
+        document.addEventListener('pointermove', function (e) {
+            tx = e.clientX; ty = e.clientY; glow.classList.add('on');
+            if (!running) { running = true; requestAnimationFrame(loop); }
+        }, { passive: true });
+    }
+
+    /* ======================= Page transitions ======================= */
+    document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href]');
+        if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        if (a.target && a.target !== '_self') return;
+        if (a.hasAttribute('download')) return;
+        var href = a.getAttribute('href');
+        if (!href || href.charAt(0) === '#' || /^(mailto:|tel:|javascript:)/i.test(href)) return;
+        var url;
+        try { url = new URL(a.href, window.location.href); } catch (err) { return; }
+        if (url.origin !== window.location.origin) return;
+        if (url.pathname === window.location.pathname && url.search === window.location.search) return;
+        if (reduceMotion) return;
+        e.preventDefault();
+        document.documentElement.classList.add('leaving');
+        setTimeout(function () { window.location.href = a.href; }, 280);
     });
-}
-prepareMotion();
+    window.addEventListener('pageshow', function (e) { if (e.persisted) document.documentElement.classList.remove('leaving'); });
 
-const siteHeader = document.querySelector('header');
-window.addEventListener('scroll', () => {
-    siteHeader.classList.toggle('scrolled', window.scrollY > 12);
-}, { passive: true });
-
-/* Re-apply reveal animation when catalogue/service cards are regenerated. */
-const originalRenderServices = renderServices;
-renderServices = function () {
-    originalRenderServices();
-    document.querySelectorAll('.service').forEach((el, i) => {
-        el.classList.add('stagger-item');
-        el.style.transitionDelay = `${Math.min((i % 6) * 70, 350)}ms`;
-        motionObserver.observe(el);
-    });
-};
-
-const originalRenderProducts = renderProducts;
-renderProducts = function () {
-    originalRenderProducts();
-    document.querySelectorAll('.product').forEach((el, i) => {
-        el.classList.add('stagger-item');
-        el.style.transitionDelay = `${Math.min((i % 8) * 55, 385)}ms`;
-        motionObserver.observe(el);
-    });
-};
-
-/* Small parallax effect for the hero image on pointer movement. */
-const hero = document.querySelector('.hero');
-const heroCarousel = document.querySelector('.carousel');
-if (hero && heroCarousel && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    hero.addEventListener('pointermove', (e) => {
-        const r = hero.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - .5;
-        const y = (e.clientY - r.top) / r.height - .5;
-        heroCarousel.style.transform = `translate(${x * 5}px,${y * 5}px)`;
-    });
-    hero.addEventListener('pointerleave', () => { heroCarousel.style.transform = 'translate(0,0)' });
-}
-
-document.getElementById('year').textContent = new Date().getFullYear(); const slidesEl = document.getElementById('slides'), dots = document.getElementById('dots'); renderSlides(); renderServices(); renderProducts(); fillQuote(); renderIndustries();
-
-// Every "Buy Now" button jumps to the quotation form with that product pre-selected
-document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.buy-now');
-    if (btn) selectQuote(btn.dataset.item);
-});
+    /* ======================= Boot ======================= */
+    var yr = $('#year'); if (yr) yr.textContent = new Date().getFullYear();
+    buildBasketUI();
+    observeReveals(document);
+    syncCounts();
+})();
